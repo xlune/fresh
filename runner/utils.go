@@ -8,6 +8,8 @@ import (
 
 func initFolders() {
 	runnerLog("InitFolders")
+	wpath := watchPath()
+	runnerLog("watch %s", wpath)
 	path := tmpPath()
 	runnerLog("mkdir %s", path)
 	err := os.Mkdir(path, 0755)
