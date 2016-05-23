@@ -42,16 +42,15 @@ func watchFolder(path string) {
 }
 
 func watch() {
-	root := root()
-	filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+	watchPath := watchPath()
+	targetPath, _ := filepath.Abs(watchPath)
+	filepath.Walk(targetPath, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() && !isTmpDir(path) {
 			if len(path) > 1 && strings.HasPrefix(filepath.Base(path), ".") {
 				return filepath.SkipDir
 			}
-
 			watchFolder(path)
 		}
-
 		return err
 	})
 }
